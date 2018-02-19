@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blog">
+	
+	<insert id="createBlog" parameterType="int">
+		<![CDATA[
+				insert into blog values(#{userNo}, 'title', 'logo')
+		]]>
+	</insert>
+	
+	<insert id="createCategory" parameterType="int">
+		<![CDATA[
+				insert into category values(seq_users_no.nextval, #{userNo}, 'cateName', 'description', sysdate)
+		]]>
+	</insert>
+	
+	<select id="selectBlogInfoByUserNo" parameterType="int" resultType="com.javaex.vo.BlogVo">
+		<![CDATA[
+				select b.userNo uesrNo, blogTitle, logoFile
+				from users u, blog b
+				where u.userNo = b.userNo
+				and b.userNo = #{userNo}
+		]]>
+	</select>
+	
+	<select id="selectCateInfoByUserNo" parameterType="int" resultType="com.javaex.vo.CateVo">
+		<![CDATA[
+				select c.userNo userNo, c.cateNo, c.cateName, c.description, to_char(regDate, 'YY-MM-DD HH:Mi:SS') regDate
+				from users u, blog b, category c
+				where u.userNo = b.userNo
+				and b.userNo = c.userNo
+				and c.userNo = #{userNo}
+		]]>
+	</select>
+	
+	<update id="modifyBlog" parameterType="com.javaex.vo.BlogVo">
+		<![CDATA[
+				update blog
+				set blogTitle = #{blogTitle},
+   				 	logoFile = #{logoFile}
+				where userNo = #{userNo}
+		]]>
+	</update>
+</mapper>	
