@@ -11,7 +11,7 @@
 	
 	<insert id="createCategory" parameterType="int">
 		<![CDATA[
-				insert into category values(seq_users_no.nextval, #{userNo}, 'cateName', 'description', sysdate)
+				insert into category values(seq_category_no.nextval, #{userNo}, 'cateName', 'description', sysdate)
 		]]>
 	</insert>
 	
@@ -42,4 +42,30 @@
 				where userNo = #{userNo}
 		]]>
 	</update>
+	
+	<select id="allCateList" parameterType= "int" resultType="com.javaex.vo.CateVo">	
+		<![CDATA[
+				select cateNo, userNo, cateName, description
+				from category
+				where userNo = #{userNo}
+		]]>
+	</select>
+	
+	<insert id="addCate" parameterType="com.javaex.vo.CateVo">
+	
+		<selectKey keyProperty="cateNo" resultType="int" order="BEFORE">	
+					select seq_category_no.nextval from dual
+		</selectKey>
+	
+		<![CDATA[
+				insert into category 
+				values(#{cateNo}, #{userNo}, #{cateName}, #{description}, sysdate) 
+		]]>
+	</insert>
+	
+	<delete id="deleteCate" parameterType="int">
+		<![CDATA[
+				delete from category where cateNo = #{cateNo}
+		]]>
+	</delete>
 </mapper>	

@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<link rel="stylesheet" href="/jblog/assets/css/jblog.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/jblog.css">
 </head>
 <body>
 	<div class="center-content">
@@ -22,9 +22,9 @@
       		<label>패스워드</label> 
       		<input type="text" name="password">
       		
-      		<p class="form-error">
-				에러메세지
-			</p>
+      		<c:if test = "${param.result eq 'fail'}">			
+					<P>로그인이 실패했습니다. 다시입력해주세요</P>
+			</c:if>
 			
       		<input type="submit" value="로그인">
 		</form>

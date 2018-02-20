@@ -33,7 +33,7 @@ public class UserController {
 		UserVo authUser = uService.login(id,password);
 		
 		if(authUser == null) {
-			return "redirect:/user/joinForm";
+			return "redirect:/user/loginform?result=fail";
 		} else {
 			session.setAttribute("authUser", authUser);
 			return "main/index";

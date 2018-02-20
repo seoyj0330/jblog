@@ -81,4 +81,14 @@ public class BlogController {
 		return "redirect:/{userId}";
 	}
 	
+	@RequestMapping(value="/{userId}/admin/category")
+	public String writeCate(@PathVariable("userId") String userid,HttpSession session) {
+		
+		System.out.println("b.category 진입");
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		
+		return "blog/admin/blog-admin-cate";
+	}
+
 }
