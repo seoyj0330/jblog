@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CateVo;
+import com.javaex.vo.PostVo;
 
 @Repository
 public class BlogDao {
@@ -57,5 +58,10 @@ public class BlogDao {
 
 	public int deleteCate(int cateNo) {
 		return sqlsession.delete("blog.deleteCate", cateNo);
+	}
+
+	public void writePost(PostVo postVo) {
+		System.out.println(postVo);
+		sqlsession.insert("blog.writePost", postVo);
 	}
 }

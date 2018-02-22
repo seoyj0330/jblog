@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.dao.BlogDao;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CateVo;
+import com.javaex.vo.PostVo;
 
 @Service
 public class BlogService {
@@ -101,8 +102,12 @@ public class BlogService {
 	}
 
 	public int deleteCate(int cateNo) {
-		// TODO Auto-generated method stub
 		return bdao.deleteCate(cateNo);
+	}
+
+	public void writePost(PostVo postVo) {
+		bdao.writePost(postVo);
+		
 	}
 
 	

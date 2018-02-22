@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.javaex.service.BlogService;
 import com.javaex.service.UserService;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CateVo;
+import com.javaex.vo.PostVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -82,13 +85,55 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/{userId}/admin/category")
-	public String writeCate(@PathVariable("userId") String userid,HttpSession session) {
+	public String writeCate(@PathVariable("userId") String userid,HttpSession session, Model model) {
 		
 		System.out.println("b.category 진입");
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		
+		BlogVo bvo = bService.getBlogInfo(authUser.getUserNo());
+		model.addAttribute("blogVo", bvo);
+		
 		return "blog/admin/blog-admin-cate";
+	}
+	
+	@RequestMapping(value="/{userId}/admin/write")
+	public String post(@PathVariable("userId") String userid, HttpSession session, CateVo catevo, Model model ) {
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		
+		BlogVo bvo = bService.getBlogInfo(authUser.getUserNo());
+		model.addAttribute("blogVo", bvo);
+		
+		int userNo = authUser.getUserNo();
+
+		//카테고리 리스트 뿌려주기
+		List<CateVo> clist = bService.allCateList(userNo);
+		model.addAttribute("clist", clist);
+		//userNo으로 받아 model에 넣어서 jsp로 넘겨주기
+
+		return "blog/admin/blog-admin-write";
+	}
+	
+	@RequestMapping(value="/{userId}/admin/writepost", method=RequestMethod.POST)
+	public String writePost(@PathVariable("userId") String userid, HttpSession session,PostVo postVo ) {
+		
+		System.out.println("writepost진입");
+		System.out.println(postVo);
+		
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		
+		if(authUser.getId().equals(userid)) {
+			
+			bService.writePost(postVo);
+			System.out.println("적은 글 : " + postVo.toString());
+			
+			return "redirect:/{userId}";
+		} else {
+			
+			return"redirect:/user/joinform";
+		}
+		
 	}
 
 }

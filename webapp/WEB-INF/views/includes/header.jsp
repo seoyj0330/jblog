@@ -4,7 +4,7 @@
 
 <!-- 블로그 해더 -->
 		<div id="header">
-			<h1>${blogVo.blogTitle}</h1>
+			<h1><a href="${pageContext.request.contextPath }/${authUser.id}">${blogVo.blogTitle}</a></h1>
 			<ul>
 			
 			<c:choose>

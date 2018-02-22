@@ -20,7 +20,7 @@
 				<ul class="admin-menu">
 					<li class="selected"><a href="${pageContext.request.contextPath }/${authUser.id}/admin/basic">기본설정</a></li>
 					<li><a href="${pageContext.request.contextPath }/${authUser.id}/admin/category">카테고리</a></li>
-					<li><a href="">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath }/${authUser.id}/admin/write">글작성</a></li>
 				</ul>
 				
 				<form action="${pageContext.request.contextPath}/${authUser.id }/admin/modify" method="post" enctype="multipart/form-data">
@@ -46,13 +46,8 @@
 			</div>
 		</div>
 		
-		<!-- 푸터 -->
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2018
-			</p>
-		</div>
-		<!-- 푸터 -->
+		<!--  footer include -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	
 	</div>
 </body>

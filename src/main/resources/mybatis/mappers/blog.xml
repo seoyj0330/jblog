@@ -68,4 +68,11 @@
 				delete from category where cateNo = #{cateNo}
 		]]>
 	</delete>
+	
+	<insert id="writePost" parameterType="com.javaex.vo.PostVo">
+		<![CDATA[
+				insert into post
+				values(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+		]]>
+	</insert>
 </mapper>	
