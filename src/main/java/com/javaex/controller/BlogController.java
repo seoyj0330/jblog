@@ -37,10 +37,12 @@ public class BlogController {
 		System.out.println("userId : " + userno);
 		
 		BlogVo blogVo = bService.getBlogInfo(userno);
-		CateVo cateVo = bService.getCateInfo(blogVo.getUserNo());
 		
+		System.out.println(blogVo);
 		model.addAttribute("blogVo", blogVo);
-		model.addAttribute("cateVo", cateVo);
+		
+		List<CateVo> clist = bService.allCateList(userno);
+		model.addAttribute("clist", clist);
 		
 		return "blog/blog-main";
 	}

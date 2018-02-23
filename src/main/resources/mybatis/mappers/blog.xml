@@ -17,7 +17,7 @@
 	
 	<select id="selectBlogInfoByUserNo" parameterType="int" resultType="com.javaex.vo.BlogVo">
 		<![CDATA[
-				select b.userNo uesrNo, blogTitle, logoFile
+				select b.userNo userNo, blogTitle, logoFile
 				from users u, blog b
 				where u.userNo = b.userNo
 				and b.userNo = #{userNo}
@@ -75,4 +75,5 @@
 				values(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
 		]]>
 	</insert>
+
 </mapper>	

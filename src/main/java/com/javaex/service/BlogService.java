@@ -28,7 +28,6 @@ public class BlogService {
 	}
 
 	public CateVo getCateInfo(int userNo) {
-		// TODO Auto-generated method stub
 		return bdao.getCateInfo(userNo);
 	}
 	

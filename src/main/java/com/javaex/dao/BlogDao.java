@@ -41,7 +41,14 @@ public class BlogDao {
 
 	public List<CateVo> cateList(int userNo) {
 		
-		List<CateVo> list = sqlsession.selectList("blog.allCateList",userNo);
+		List<CateVo> list = sqlsession.selectList("blog.allCateList", userNo);
+		
+//		System.out.println(list.size());
+//		
+//		for(CateVo cate : list) {
+//			System.out.println(cate.getCateName());
+//		}
+		
 		return list;
 	}
 
